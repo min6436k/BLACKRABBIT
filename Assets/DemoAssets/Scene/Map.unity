@@ -489,6 +489,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2176450110255459264, guid: cb1658cb8ed8aed42b7922a27d740ad8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1375686116}
+    - targetCorrespondingSourceObject: {fileID: 2176450110255459264, guid: cb1658cb8ed8aed42b7922a27d740ad8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1375686118}
     - targetCorrespondingSourceObject: {fileID: -7704502226129714916, guid: cb1658cb8ed8aed42b7922a27d740ad8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 278969293}
@@ -1187,6 +1190,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6929007082076824888, guid: cb1658cb8ed8aed42b7922a27d740ad8, type: 3}
+--- !u!114 &1375686118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375686112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bf2a4a04f92664b8facc389274356f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1414826677 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7581132755220668488, guid: cb1658cb8ed8aed42b7922a27d740ad8, type: 3}
@@ -1531,6 +1546,7 @@ GameObject:
   - component: {fileID: 1713869668}
   - component: {fileID: 1713869670}
   - component: {fileID: 1713869669}
+  - component: {fileID: 1713869671}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1606,6 +1622,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+--- !u!114 &1713869671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713869661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032af33cb1eba244f98fa833c83f0973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 3
 --- !u!1 &1782803425 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4988859313308960109, guid: cb1658cb8ed8aed42b7922a27d740ad8, type: 3}
