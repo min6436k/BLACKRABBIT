@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -17,6 +18,24 @@ public interface IInteractable
 /// </summary>
 public abstract class InteractableObject : MonoBehaviour, IInteractable
 {
+    private readonly Color _activeColor = ColorUtility.TryParseHtmlString("#9DFE44", out var color) ? color : Color.white;
+    private readonly Color _inactiveColor = ColorUtility.TryParseHtmlString("#ADADAD", out var inactiveColor) ? inactiveColor : Color.white;
+
+    
+    private Outline _outline;
+
+    private void Awake()
+    {
+        _outline = gameObject.AddComponent<Outline>();
+        _outline.enabled = false;
+        _outline.OutlineColor = _activeColor;
+        _outline.OutlineWidth = 6.5f;
+    }
+
+    public void SetOutLine(bool isActive)
+    {
+        _outline.enabled = isActive;
+    }
     public abstract void Interact();
     public abstract bool IsInteractionPossible(); 
 }

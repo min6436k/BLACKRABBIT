@@ -5,6 +5,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private float interactionDistance;
     
+    private InteractableObject _lastDetectedObject = null;
     private Camera _cam;
 
     private void Awake()
@@ -14,12 +15,21 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out RaycastHit hit, interactionDistance) &&
-            Input.GetKeyDown(KeyCode.F))
+        if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out RaycastHit hit, interactionDistance))
         {
+            if (_lastDetectedObject != null
+            && hit.collider.gameObject != _lastDetectedObject.gameObject)
+            {
+                _lastDetectedObject.SetOutLine(false);    
+            }
+            
             if (hit.collider.gameObject.TryGetComponent(out InteractableObject targetObject))
             {
-                if (targetObject.IsInteractionPossible())
+                if (_lastDetectedObject != targetObject) _lastDetectedObject = targetObject;
+                
+                targetObject.SetOutLine(true);    
+                
+                if (Input.GetKeyDown(KeyCode.F) && targetObject.IsInteractionPossible())
                 {
                     targetObject.Interact();
                 }

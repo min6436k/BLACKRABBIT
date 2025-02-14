@@ -4,7 +4,7 @@ public class TestObject : InteractableObject
 {
     public override void Interact()
     {
-        Debug.Log("상호작용");
+        Debug.Log(GetComponent<Outline>().OutlineColor);
     }
 
     public override bool IsInteractionPossible()
