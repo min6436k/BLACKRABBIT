@@ -26,6 +26,7 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
 
     private void Awake()
     {
+        //아웃라인 에셋 초기설정
         _outline = gameObject.AddComponent<Outline>();
         _outline.enabled = false;
         _outline.OutlineColor = _activeColor;

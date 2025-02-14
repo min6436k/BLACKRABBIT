@@ -17,6 +17,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out RaycastHit hit, interactionDistance))
         {
+            //마지막으로 감지한 오브젝트와 다를 시 이전 오브젝트 아웃라인 해제
             if (_lastDetectedObject != null
             && hit.collider.gameObject != _lastDetectedObject.gameObject)
             {
@@ -33,6 +34,14 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     targetObject.Interact();
                 }
+            }
+        }
+        else
+        {
+            //레이캐스트가 감지되지 않을 시 아웃라인 해제
+            if (_lastDetectedObject != null)
+            {
+                _lastDetectedObject.SetOutLine(false);    
             }
         }
     }
