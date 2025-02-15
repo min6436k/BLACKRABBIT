@@ -35,6 +35,7 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
 
     public void SetOutLine(bool isActive)
     {
+        _outline.OutlineColor = IsInteractionPossible() ? _activeColor : _inactiveColor;
         _outline.enabled = isActive;
     }
     public abstract void Interact();

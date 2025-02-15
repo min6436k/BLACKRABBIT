@@ -2,9 +2,18 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+public enum PlayerState
+{
+    Idle,
+    Interact,
+    JumpScare,
+}
+    
+
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5;
+    public float MoveSpeed { get; private set; } = 2;
+    public PlayerState currentState = PlayerState.Idle;
     
     //GetAxis 입력 중간 저장
     private float _inputX, _inputY;
@@ -15,9 +24,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 _moveDir;
     private float _dirSpeed;
     public CharacterController Controller { get; private set; }
-
     
-    //후에 State등 이동 제한 구조(필요에 따라 hashset까지) 추가, PlayerCamera 애니메이션에 조건문 추가
+    
     void Start()
     {
         Controller = GetComponent<CharacterController>();
@@ -25,7 +33,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Move();
+
+        if(currentState == PlayerState.Idle)
+            Move();
     }
 
     void Move()
@@ -39,7 +49,7 @@ public class PlayerController : MonoBehaviour
         _moveDir = _moveInput.normalized;
         
         //magnitude 사용하여 대각선 이동 루트2 속도 제한
-        _dirSpeed = Mathf.Min(_moveInput.magnitude, 1.0f) * moveSpeed*Time.deltaTime;
+        _dirSpeed = Mathf.Min(_moveInput.magnitude, 1.0f) * MoveSpeed*Time.deltaTime;
 
         //두 값을 합쳐 자연스러운 이동속도 구현
         Controller.Move(_moveDir * _dirSpeed);
