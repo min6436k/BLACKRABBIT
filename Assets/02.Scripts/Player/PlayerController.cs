@@ -13,8 +13,8 @@ public enum PlayerState
 public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed { get; private set; } = 2;
-    public PlayerState currentState = PlayerState.Idle;
-    
+    public PlayerState CurrentState { get; set; } = PlayerState.Idle;
+
     //GetAxis 입력 중간 저장
     private float _inputX, _inputY;
     
@@ -34,8 +34,22 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if(currentState == PlayerState.Idle)
+        if(CurrentState == PlayerState.Idle)
             Move();
+        else
+        {
+            ExitInteract();
+        }
+    }
+
+    //임시
+    void ExitInteract()
+    {
+        if (CurrentState == PlayerState.Interact && Input.GetKey(KeyCode.Escape))
+        {
+            CurrentState = PlayerState.Idle;
+            GameManager.Instance.cameraManager.PlayerView();
+        }
     }
 
     void Move()

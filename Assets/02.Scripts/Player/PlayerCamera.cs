@@ -29,7 +29,7 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
-        if (_playerController.currentState == PlayerState.Idle)
+        if (_playerController.CurrentState == PlayerState.Idle)
             Rotate();
     }
 
@@ -57,7 +57,7 @@ public class PlayerCamera : MonoBehaviour
     private void HeadBobing()
     {
         //플레이어가 평소 상태이고 움직이고 있을 시
-        bool anableMove = _playerController.currentState == PlayerState.Idle && _playerController.Controller.velocity.magnitude > 0.3f;
+        bool anableMove = _playerController.CurrentState == PlayerState.Idle && _playerController.Controller.velocity.magnitude > 0.3f;
         _cameraAnim.SetBool("bHeadBobing",anableMove);
     }
 }
