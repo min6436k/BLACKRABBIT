@@ -25,6 +25,9 @@ public class PlayerCamera : MonoBehaviour
         //태그or인덱스로 변경 예정
         _cameraFollowTR = transform.Find("CameraFollow");
         _cameraAnim = _cameraFollowTR.GetComponent<Animator>();
+        
+        // 메인 카메라를 플레이어 카메라로 변경 (메인 카메라가 옷장 자물쇠로 되어있길레 임시로 쓴 코드)
+        GameManager.Instance.cameraManager.ViewChange(GameManager.Instance.cameraManager.playerCam);
     }
 
     void Update()

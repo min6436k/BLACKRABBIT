@@ -631,6 +631,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9009182532765119933, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -671,6 +675,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6183934059400025221, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -1799017658527028120, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -695,9 +703,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: -1737058246594761472, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -1353588070065995233, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
       propertyPath: m_Name
       value: house demo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290556695092878901, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410974760452451653, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8914570129354073301, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1681,7 +1705,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -1707,8 +1731,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473532941}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.857, y: 1.645, z: -0.573}
+  m_LocalRotation: {x: 0.028079303, y: 0.722478, z: -0.029598258, w: 0.69018924}
+  m_LocalPosition: {x: 3.052, y: 1.64, z: -0.646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2143,7 +2167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032af33cb1eba244f98fa833c83f0973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 3
+  interactionDistance: 1
+  interactionRadius: 0.2
 --- !u!1 &1800073058 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3489228241090617347, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
