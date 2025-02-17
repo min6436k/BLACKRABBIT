@@ -6,20 +6,29 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float interactionDistance;
     
     private InteractableObject _lastDetectedObject = null;
+
+    private PlayerController PlayerController => GameManager.Instance.playerController;
+
     private Camera _cam;
 
     private void Awake()
     {
-        _cam = Camera.main;
+        _cam = GameManager.Instance.mainCamera;
     }
 
     private void Update()
+    {
+        SearchObj();
+        ExitInteract();
+    }
+
+    private void SearchObj()
     {
         if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out RaycastHit hit, interactionDistance))
         {
             //마지막으로 감지한 오브젝트와 다를 시 이전 오브젝트 아웃라인 해제
             if (_lastDetectedObject != null
-            && hit.collider.gameObject != _lastDetectedObject.gameObject)
+                && hit.collider.gameObject != _lastDetectedObject.gameObject)
             {
                 _lastDetectedObject.SetOutLine(false);    
             }
@@ -43,6 +52,21 @@ public class PlayerInteraction : MonoBehaviour
             {
                 _lastDetectedObject.SetOutLine(false);    
             }
+        }
+    }
+    
+    /// <summary>
+    /// 클로즈업과 같은 상호작용 상태에서 벗어나는 함수
+    /// </summary>
+    private void ExitInteract()
+    {
+        if (PlayerController.CurrentState == PlayerState.Interact && Input.GetKey(KeyCode.Escape))
+        {
+            PlayerController.CurrentState = PlayerState.Idle;
+            GameManager.Instance.cameraManager.PlayerView();
+            
+            if(_lastDetectedObject is CloseUpInteractableObject closeUpObject) 
+                closeUpObject.OutInteract();
         }
     }
 

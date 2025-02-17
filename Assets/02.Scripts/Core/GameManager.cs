@@ -5,7 +5,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerController playerController;
+    public Camera mainCamera;
     public CameraManager cameraManager;
+    public UINavigation uINavigation => GetComponent<UINavigation>();
+    public Canvas canvas;
 
     private void Awake()
     {

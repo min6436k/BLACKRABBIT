@@ -36,24 +36,11 @@ public class PlayerController : MonoBehaviour
 
         if(CurrentState == PlayerState.Idle)
             Move();
-        else
-        {
-            ExitInteract();
-        }
-    }
-
-    //임시
-    void ExitInteract()
-    {
-        if (CurrentState == PlayerState.Interact && Input.GetKey(KeyCode.Escape))
-        {
-            CurrentState = PlayerState.Idle;
-            GameManager.Instance.cameraManager.PlayerView();
-        }
     }
 
     void Move()
     {
+        
         (_inputX, _inputY) = (Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
 
         //인풋을 벡터로 저장
