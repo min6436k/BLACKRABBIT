@@ -9,7 +9,7 @@ public class Door : InteractableObject
 
     void Start()
     {
-        _openDoor = transform.DORotate(new Vector3(0,20,-180), 1).Pause()
+        _openDoor = transform.DORotate(new Vector3(0,-180,-180), 1).Pause()
             .SetAutoKill(false).SetEase(Ease.InOutQuart);
     }
     public override void Interact()

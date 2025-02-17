@@ -29,17 +29,22 @@ public abstract class CloseUpInteractableObject : InteractableObject
     public override void Interact()
     {
         GameManager.Instance.playerController.CurrentState = PlayerState.Interact;
-        GameManager.Instance.cameraManager.ViewChange(GameManager.Instance.cameraManager.closetLockCam);
 
         DOVirtual.DelayedCall(0.2f, () => _closeUp.PlayForward());
 
         Cursor.lockState = CursorLockMode.None;
+        
+        ChangeLayer(transform, "OverUI");
+
     }
     
     public virtual void OutInteract()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         _closeUp.PlayBackwards();
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        
+        ChangeLayer(transform, "Default");
     }
 
     private void ChangeLayer(Transform trans, string layerName)

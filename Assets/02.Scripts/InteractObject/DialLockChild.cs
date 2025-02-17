@@ -11,7 +11,7 @@ public enum DialState{
     CloseUp,
 }
 
-public class DialLockChild : MonoBehaviour, IClickListener
+public class DialLockChild : MonoBehaviour, IInputListener
 {
     [HideInInspector] public DialLock parentDialLock;
     public int CodeIndex { get; private set; }
@@ -35,12 +35,12 @@ public class DialLockChild : MonoBehaviour, IClickListener
 
     public void InitClickHandler()
     {
-        ClickHandler clickHandler = gameObject.AddComponent<ClickHandler>();
-        clickHandler.Listener = this;
-        clickHandler.enabled = false;
+        InputHandler inputHandler = gameObject.AddComponent<InputHandler>();
+        inputHandler.Listener = this;
+        inputHandler.enabled = false;
     }
 
-    public void GetClickDown()
+    public void OnClick()
     {
         if (_dialState == DialState.Idle)
         {
@@ -51,8 +51,10 @@ public class DialLockChild : MonoBehaviour, IClickListener
 
 
 
-    public void MheelMove(float value)
+    public void InputUpdate()
     {
+        float value = Input.GetAxisRaw("Mouse ScrollWheel");
+
         if (value != 0 && _dialState == DialState.CloseUp)
         {
             CodeIndex += (int)(value*10);
@@ -67,14 +69,6 @@ public class DialLockChild : MonoBehaviour, IClickListener
             else if (CodeIndex < 0) CodeIndex = parentDialLock.codeList.Length - 1;
             parentDialLock.UpdateCode();
         }
-    }
-    
-    public void GetClickUp()
-    {
-    }
-    
-    public void GetClick()
-    {
     }
 
     public void OtherPointClick()

@@ -1,15 +1,19 @@
 using System;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 
 
-/// <summary>
-/// 옷장 자물쇠
-/// </summary>
+public enum DialLockType
+{
+    Closet,
+    Toliet,
+}
 public class DialLock : CloseUpInteractableObject
 {
+    public DialLockType dialLockType;
     public Char[] codeList;
-    public Char[] currentCode;
+    private Char[] _currentCode;
     [HideInInspector] public float codeAngleStep;
 
     private Transform _cylindersTR;
@@ -23,11 +27,11 @@ public class DialLock : CloseUpInteractableObject
         base.Start();
 
         _cylindersTR = transform.Find("Cylinders");
-        if (transform.GetChild(1) == null)
+        if (_cylindersTR == null)
             throw new ArgumentException("Cylinders가 없습니다.");
 
         _dials = _cylindersTR.GetComponentsInChildren<DialLockChild>();
-        currentCode = new Char[_dials.Length];
+        _currentCode = new Char[_dials.Length];
 
         foreach (DialLockChild dial in _dials)
             dial.parentDialLock = this;
@@ -39,10 +43,18 @@ public class DialLock : CloseUpInteractableObject
     {
         base.Interact();
 
+        CinemachineCamera tempCam = dialLockType switch
+        {
+            DialLockType.Closet => GameManager.Instance.cameraManager.closetLockCam,
+            DialLockType.Toliet => GameManager.Instance.cameraManager.toiletCam
+        };
+        GameManager.Instance.cameraManager.ViewChange(tempCam);
+
+
         //모든 다이얼 활성화
         foreach (Transform child in _cylindersTR)
         {
-            child.GetComponent<ClickHandler>().enabled = true;
+            child.GetComponent<InputHandler>().enabled = true;
             child.GetComponent<MeshCollider>().enabled = true;
         }
 
@@ -57,7 +69,7 @@ public class DialLock : CloseUpInteractableObject
         //모든 다이얼 비활성화
         foreach (Transform child in _cylindersTR)
         {
-            child.GetComponent<ClickHandler>().enabled = false;
+            child.GetComponent<InputHandler>().enabled = false;
             child.GetComponent<MeshCollider>().enabled = false;
         }
 
@@ -72,9 +84,9 @@ public class DialLock : CloseUpInteractableObject
     public void UpdateCode()
     {
         for (int i = 0; i < _dials.Length; i++)
-            currentCode[i] = codeList[_dials[i].CodeIndex];
+            _currentCode[i] = codeList[_dials[i].CodeIndex];
 
-        text.text = string.Join(" ", currentCode);
+        text.text = string.Join("", _currentCode);
     }
 
     public override bool IsInteractionPossible()
