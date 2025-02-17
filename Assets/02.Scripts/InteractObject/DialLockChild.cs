@@ -13,7 +13,7 @@ public enum DialState{
 
 public class DialLockChild : MonoBehaviour, IInputListener
 {
-    [HideInInspector] public DialLock parentDialLock;
+    public DialLock parentDialLock;
     public int CodeIndex { get; private set; }
 
     private Tweener _sizeUpTween;
@@ -42,6 +42,7 @@ public class DialLockChild : MonoBehaviour, IInputListener
 
     public void OnClick()
     {
+        Debug.Log("클릭");
         if (_dialState == DialState.Idle)
         {
             _dialState = DialState.CloseUp;
