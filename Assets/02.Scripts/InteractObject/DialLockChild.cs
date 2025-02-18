@@ -42,7 +42,6 @@ public class DialLockChild : MonoBehaviour, IInputListener
 
     public void OnClick()
     {
-        Debug.Log("클릭");
         if (_dialState == DialState.Idle)
         {
             _dialState = DialState.CloseUp;
