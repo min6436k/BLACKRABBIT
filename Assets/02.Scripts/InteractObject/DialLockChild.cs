@@ -13,18 +13,19 @@ public enum DialState{
 
 public class DialLockChild : MonoBehaviour, IInputListener
 {
-    [HideInInspector] public DialLock parentDialLock;
     public int CodeIndex { get; private set; }
 
+    private DialLock _parentDialLock;
     private Tweener _sizeUpTween;
     private Tween _dialMoveTween;
     private Vector3 _originScale;
     private DialState _dialState;
 
-    public void Start()
+    public void Init(DialLock parentDialLock)
     {
         InitClickHandler();
-        
+
+        _parentDialLock = parentDialLock;
         _originScale = transform.localScale;
         _sizeUpTween = transform.DOScale(_originScale*1.5f, 0.7f).Pause()
             .SetAutoKill(false).SetEase(Ease.InOutQuart);
@@ -61,13 +62,13 @@ public class DialLockChild : MonoBehaviour, IInputListener
 
             Vector3 rotateVector;
 
-            rotateVector = Vector3.up * (CodeIndex * parentDialLock.codeAngleStep); 
+            rotateVector = Vector3.up * (CodeIndex * _parentDialLock.codeAngleStep); 
             _dialMoveTween.Kill();
             _dialMoveTween = transform.DOLocalRotate(rotateVector, 0.2f);
 
-            if (CodeIndex >= parentDialLock.codeList.Length) CodeIndex = 0;
-            else if (CodeIndex < 0) CodeIndex = parentDialLock.codeList.Length - 1;
-            parentDialLock.UpdateCode();
+            if (CodeIndex >= _parentDialLock.codeList.Length) CodeIndex = 0;
+            else if (CodeIndex < 0) CodeIndex = _parentDialLock.codeList.Length - 1;
+            _parentDialLock.UpdateCode();
         }
     }
 

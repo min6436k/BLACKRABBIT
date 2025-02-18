@@ -34,7 +34,7 @@ public class DialLock : CloseUpInteractableObject
         _currentCode = new Char[_dials.Length];
 
         foreach (DialLockChild dial in _dials)
-            dial.parentDialLock = this;
+            dial.Init(this);
 
         codeAngleStep = 360f / codeList.Length;
     }
@@ -46,7 +46,8 @@ public class DialLock : CloseUpInteractableObject
         CinemachineCamera tempCam = dialLockType switch
         {
             DialLockType.Closet => GameManager.Instance.cameraManager.closetLockCam,
-            DialLockType.Toliet => GameManager.Instance.cameraManager.toiletCam
+            DialLockType.Toliet => GameManager.Instance.cameraManager.toiletCam,
+            _ => GameManager.Instance.cameraManager.playerCam
         };
         GameManager.Instance.cameraManager.ViewChange(tempCam);
 

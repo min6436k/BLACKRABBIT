@@ -86,7 +86,8 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
                 KeyCode.UpArrow => '↑',
                 KeyCode.DownArrow => '↓',
                 KeyCode.RightArrow => '→',
-                KeyCode.LeftArrow => '←'
+                KeyCode.LeftArrow => '←',
+                _ => '\0'
             };
 
             text.text += temp;
@@ -102,6 +103,7 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
             KeyCode.DownArrow  => Vector3.down,
             KeyCode.RightArrow => Vector3.forward,
             KeyCode.LeftArrow  => Vector3.back,
+            _ => Vector3.zero
         };
 
         

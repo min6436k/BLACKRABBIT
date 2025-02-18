@@ -16,6 +16,7 @@ public class CameraManager : MonoBehaviour
     {
         _nonPlayerCameraList.Add(closetLockCam);
         _nonPlayerCameraList.Add(exitDoorLockCam);
+        _nonPlayerCameraList.Add(toiletCam);
     }
 
     public void ViewChange(CinemachineCamera target)

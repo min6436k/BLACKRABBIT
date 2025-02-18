@@ -44,7 +44,7 @@ public abstract class CloseUpInteractableObject : InteractableObject
         
         Cursor.lockState = CursorLockMode.Locked;
         
-        ChangeLayer(transform, "Default");
+        ChangeLayer(transform, "Interactables");
     }
 
     private void ChangeLayer(Transform trans, string layerName)

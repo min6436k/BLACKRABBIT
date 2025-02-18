@@ -25,7 +25,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void SearchObj()
     {
-        if (Physics.SphereCast(_cam.transform.position, interactionRadius, _cam.transform.forward, out RaycastHit hit, interactionDistance, LayerMask.GetMask("Interactables")))
+        if (Physics.SphereCast(_cam.transform.position, interactionRadius, _cam.transform.forward, out RaycastHit hit, interactionDistance, LayerMask.GetMask("Interactables"))
+            && PlayerController.CurrentState == PlayerState.Idle)
         {
             //마지막으로 감지한 오브젝트와 다를 시 이전 오브젝트 아웃라인 해제
             if (_lastDetectedObject != null
