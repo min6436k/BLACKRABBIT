@@ -14,10 +14,14 @@ public class DialLock : CloseUpInteractableObject
     public DialLockType dialLockType;
     public Char[] codeList;
     private Char[] _currentCode;
+    
+    [SerializeField] private Char[] _passward; // 비밀번호
     [HideInInspector] public float codeAngleStep;
 
     private Transform _cylindersTR;
     private DialLockChild[] _dials;
+    
+    public bool isLock;
 
     //임시
     private TextMeshProUGUI text;
@@ -25,6 +29,8 @@ public class DialLock : CloseUpInteractableObject
     public override void Start()
     {
         base.Start();
+        
+        isLock = true;
 
         _cylindersTR = transform.Find("Cylinders");
         if (_cylindersTR == null)
@@ -32,9 +38,20 @@ public class DialLock : CloseUpInteractableObject
 
         _dials = _cylindersTR.GetComponentsInChildren<DialLockChild>();
         _currentCode = new Char[_dials.Length];
+        
+        _passward = new Char[_dials.Length];
 
         foreach (DialLockChild dial in _dials)
+        {
             dial.parentDialLock = this;
+            dial.Init();
+        }
+
+        // 비밀번호 생성 (임시)
+        for (int i = 0; i < _dials.Length; i++)
+        {
+            _passward[i] = codeList[i];
+        }
 
         codeAngleStep = 360f / codeList.Length;
     }
@@ -59,6 +76,7 @@ public class DialLock : CloseUpInteractableObject
         }
 
         text = GameManager.Instance.uINavigation.Open("InteractCloseUpUI").GetComponentInChildren<TextMeshProUGUI>();
+        
         UpdateCode();
     }
 
@@ -89,8 +107,24 @@ public class DialLock : CloseUpInteractableObject
         text.text = string.Join("", _currentCode);
     }
 
+    // 비밀번호 맞는지 체크
+    public void CheckCode()
+    {
+        for (int i = 0; i < _dials.Length; i++)
+        {
+            if (_currentCode[i] != _passward[i])
+            {
+                Debug.Log("비밀번호 틀림");
+                return;
+            }
+        }
+        
+        Debug.Log("잠금 해제");
+        isLock = false;
+    }
+
     public override bool IsInteractionPossible()
     {
-        return true;
+        return isLock;
     }
 }

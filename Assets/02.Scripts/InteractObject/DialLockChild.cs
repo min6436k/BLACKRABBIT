@@ -20,8 +20,8 @@ public class DialLockChild : MonoBehaviour, IInputListener
     private Tween _dialMoveTween;
     private Vector3 _originScale;
     private DialState _dialState;
-
-    public void Start()
+    
+    public void Init()
     {
         InitClickHandler();
         
@@ -42,6 +42,7 @@ public class DialLockChild : MonoBehaviour, IInputListener
 
     public void OnClick()
     {
+        Debug.Log("클릭");
         if (_dialState == DialState.Idle)
         {
             _dialState = DialState.CloseUp;
@@ -68,6 +69,12 @@ public class DialLockChild : MonoBehaviour, IInputListener
             if (CodeIndex >= parentDialLock.codeList.Length) CodeIndex = 0;
             else if (CodeIndex < 0) CodeIndex = parentDialLock.codeList.Length - 1;
             parentDialLock.UpdateCode();
+        }
+        
+        // 엔터키 누르면 비밀번호 맞는지 체크
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            parentDialLock.CheckCode();
         }
     }
 

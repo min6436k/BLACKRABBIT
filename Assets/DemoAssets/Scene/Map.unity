@@ -1893,7 +1893,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialLockType: 1
   codeList: 3000310032003300340035003600370038003900
+  _passward: 
   codeAngleStep: 0
+  isLock: 0
 --- !u!1 &739453978 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2290556695092878901, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
@@ -1935,7 +1937,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialLockType: 0
   codeList: 53004800510049004d00440041004500
+  _passward: 
   codeAngleStep: 0
+  isLock: 0
 --- !u!4 &739453988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2601659322123694220, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
@@ -2522,6 +2526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e9aae2dc0638e45ab0979f12ee5b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Lock>k__BackingField: {fileID: 732151282}
 --- !u!1 &1170307210 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6668768010367944834, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
