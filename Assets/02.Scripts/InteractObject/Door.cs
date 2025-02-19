@@ -6,8 +6,8 @@ public class Door : ActiveInteractableObject
 {
     public override Tweener SetTween()
     {
-        return transform.DORotate(new Vector3(0,-180,-180), 1).Pause()
-            .SetAutoKill(false).SetEase(Ease.InOutQuart);
+        return transform.DORotate(new Vector3(0,-180,-180), 2.5f).Pause()
+            .SetAutoKill(false).SetEase(Ease.InOutCubic);
     }
 
     public override bool IsInteractionPossible()

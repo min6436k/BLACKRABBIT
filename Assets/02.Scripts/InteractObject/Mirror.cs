@@ -6,7 +6,8 @@ public class Mirror : InteractableObject
     public override void Interact()
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
-        GetComponentInChildren<ParticleSystem>().Emit(60);
+        GetComponentInChildren<ParticleSystem>().Emit(100);
+        GetComponent<AudioSource>().Play();
     }
 
 
