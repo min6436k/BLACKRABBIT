@@ -17,7 +17,7 @@ public abstract class CloseUpInteractableObject : InteractableObject
         _closUpTargetTR = transform.Find("CloseUpPosition");
         
         if (_closUpTargetTR == null)
-            throw new ArgumentException("CloseUpPosition이 없거나 첫 번째 자식 오브젝트가 아닙니다.");
+            throw new System.Exception("CloseUpPosition이 없거나 첫 번째 자식 오브젝트가 아닙니다.");
         
         _closeUp = DOTween.Sequence().Pause()
             .SetAutoKill(false).SetEase(Ease.InOutQuart);

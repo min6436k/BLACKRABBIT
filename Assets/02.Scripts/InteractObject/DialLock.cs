@@ -28,7 +28,7 @@ public class DialLock : CloseUpInteractableObject
 
         _cylindersTR = transform.Find("Cylinders");
         if (_cylindersTR == null)
-            throw new ArgumentException("Cylinders가 없습니다.");
+            throw new System.Exception("Cylinders가 없습니다.");
 
         _dials = _cylindersTR.GetComponentsInChildren<DialLockChild>();
         _currentCode = new Char[_dials.Length];

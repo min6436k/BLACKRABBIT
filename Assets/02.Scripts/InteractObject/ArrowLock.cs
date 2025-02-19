@@ -26,7 +26,7 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
         
         _handleTR = transform.Find("Handle");
         if (_handleTR == null)
-            throw new ArgumentException("Handle이 없습니다.");
+            throw new System.Exception("Handle이 없습니다.");
 
     }
     
