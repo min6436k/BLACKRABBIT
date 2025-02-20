@@ -3,30 +3,48 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class TV : InteractableObject
+public class TV : CloseUpInteractableObject
 {
+    public Texture[] TVImages;
     private GameObject TVScreen;
+    public Material TVMat;
     private AudioSource _audioSource;
 
-    private bool isPlayingEffect = false;
     private void Start()
     {
         TVScreen = transform.GetChild(0).gameObject;
+        TVMat = TVScreen.GetComponent<MeshRenderer>().materials[1];
         _audioSource = GetComponent<AudioSource>();
+        TVMat.SetTexture("Image",TVImages[0]);
     }
 
     public override void Interact()
     {
-        if (isPlayingEffect) return;
-        
-        if(TVScreen.activeSelf == false) StartCoroutine(OnEffect());
-        else if(TVScreen.activeSelf) StartCoroutine(OffEffect());
+        base.Interact();
+        StartCoroutine(PlayScreen());
+        GameManager.Instance.cameraManager.ViewChange(GameManager.Instance.cameraManager.tvCam);
     }
 
 
     public override bool IsInteractionPossible()
     {
         return true;
+    }
+
+    public override void OutInteract()
+    {
+        base.OutInteract();
+        StartCoroutine(OffEffect());
+    }
+
+    IEnumerator PlayScreen()
+    {
+        yield return StartCoroutine(OnEffect());
+        foreach (Texture i in TVImages)
+        {
+            TVMat.SetTexture("_Image",i);
+            yield return new WaitForSeconds(3);
+        }
     }
 
     IEnumerator OnEffect()

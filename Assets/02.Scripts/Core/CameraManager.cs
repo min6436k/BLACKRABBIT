@@ -11,6 +11,7 @@ public class CameraManager : MonoBehaviour
     public CinemachineCamera exitDoorLockCam;
     public CinemachineCamera noteCam;
     public CinemachineCamera toiletCam;
+    public CinemachineCamera tvCam;
 
     private List<CinemachineCamera> _nonPlayerCameraList = new List<CinemachineCamera>();
 

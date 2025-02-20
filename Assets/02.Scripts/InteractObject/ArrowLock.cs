@@ -17,7 +17,7 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
     private bool _isMoving = false; 
 
     //임시
-    private TextMeshProUGUI text;
+    public TextMeshProUGUI[] text;
 
     public override void Start()
     {
@@ -42,7 +42,7 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
         base.Interact();
         GameManager.Instance.cameraManager.ViewChange(GameManager.Instance.cameraManager.exitDoorLockCam);
         
-        text = GameManager.Instance.uINavigation.Open("InteractCloseUpUI").GetComponentInChildren<TextMeshProUGUI>();
+        text = GameManager.Instance.uINavigation.Open("ArrowLockUI").GetComponentsInChildren<TextMeshProUGUI>();
 
         GetComponent<InputHandler>().enabled = true;
     }
@@ -53,6 +53,7 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
         base.OutInteract();
         GameManager.Instance.uINavigation.Close();
         GetComponent<InputHandler>().enabled = false;
+        CodeInit();
     }
     
     public void InputUpdate()
@@ -69,18 +70,22 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
             ArrowMove(KeyCode.LeftArrow).Play();
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            _currentIndex = 0;
-            _currentCode = new KeyCode[4];
-            text.text = "";
+            CodeInit();
         }
+    }
+
+    private void CodeInit()
+    {
+        _currentIndex = 0;
+        _currentCode = new KeyCode[4];
+        foreach (TextMeshProUGUI textMeshProUGUI in text)
+            textMeshProUGUI.text = "";
     }
 
     private Tweener ArrowMove(KeyCode inputArrow)
     {
         if (_currentIndex < 4)
         {
-            _currentCode[_currentIndex++] = inputArrow;
-            
             char temp  = inputArrow switch
             {
                 KeyCode.UpArrow => '↑',
@@ -89,8 +94,8 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
                 KeyCode.LeftArrow => '←',
                 _ => '\0'
             };
-
-            text.text += temp;
+            text[_currentIndex].text = temp.ToString();
+            _currentCode[_currentIndex++] = inputArrow;
         }
         
         _handleOriginPosition = _handleTR.transform.position;
