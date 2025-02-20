@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     public PlayerController playerController;
     public Camera mainCamera;
     public CameraManager cameraManager;
-    public UINavigation uINavigation => GetComponent<UINavigation>();
+    [HideInInspector] public UINavigation uINavigation;
+    [HideInInspector] public SoundManager soundManager;
     public Canvas canvas;
 
     private void Awake()
@@ -21,5 +22,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        uINavigation = GetComponent<UINavigation>();
+        soundManager = GetComponent<SoundManager>();
     }
 }

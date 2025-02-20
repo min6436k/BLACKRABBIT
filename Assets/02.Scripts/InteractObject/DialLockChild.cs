@@ -58,6 +58,7 @@ public class DialLockChild : MonoBehaviour, IInputListener
 
         if (value != 0 && _dialState == DialState.CloseUp)
         {
+            GameManager.Instance.soundManager.PlaySFX("자물쇠 다이얼 사운드",volume:0.4f);
             CodeIndex += (int)(value*10);
 
             Vector3 rotateVector;

@@ -7,7 +7,7 @@ public class Mirror : InteractableObject
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
         GetComponentInChildren<ParticleSystem>().Emit(100);
-        GetComponent<AudioSource>().Play();
+        GameManager.Instance.soundManager.PlaySFX("거울 깨는 사운드");
     }
 
 
