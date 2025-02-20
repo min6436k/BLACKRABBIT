@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Camera mainCamera;
     public CameraManager cameraManager;
     public EventManager eventManager;
+    public GameFlags gameFlags;
     public UINavigation uINavigation => GetComponent<UINavigation>();
     public Canvas canvas;
 

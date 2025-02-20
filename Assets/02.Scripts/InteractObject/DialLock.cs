@@ -39,20 +39,12 @@ public class DialLock : CloseUpInteractableObject
         _dials = _cylindersTR.GetComponentsInChildren<DialLockChild>();
         _currentCode = new Char[_dials.Length];
         
-        _passward = new Char[_dials.Length];
-
         foreach (DialLockChild dial in _dials)
         {
             dial.parentDialLock = this;
             dial.Init();
         }
-
-        // 비밀번호 생성 (임시)
-        for (int i = 0; i < _dials.Length; i++)
-        {
-            _passward[i] = codeList[i];
-        }
-
+        
         codeAngleStep = 360f / codeList.Length;
     }
 
@@ -120,6 +112,10 @@ public class DialLock : CloseUpInteractableObject
         }
         
         Debug.Log("잠금 해제");
+        if (dialLockType == DialLockType.Closet)
+        {
+            GameManager.Instance.gameFlags.isUnlockCloset = true;
+        }
         isLock = false;
     }
 
