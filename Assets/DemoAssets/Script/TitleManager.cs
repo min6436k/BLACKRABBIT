@@ -5,7 +5,7 @@ public class TitleManager : MonoBehaviour
 {
     public void PlayButton()
     {
-        SceneManager.LoadSceneAsync("Map");
+        SceneManager.LoadSceneAsync("Story");
     }
 
     public void ExitButton()
