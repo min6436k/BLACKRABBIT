@@ -115,6 +115,7 @@ public class DialLock : CloseUpInteractableObject
         if (dialLockType == DialLockType.Closet)
         {
             GameManager.Instance.gameFlags.isUnlockCloset = true;
+            GameManager.Instance.eventManager.ClosetUnlockEvent.Invoke();
         }
         isLock = false;
     }

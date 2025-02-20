@@ -804,7 +804,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc62b7bd5d37ef48ba0006343b0a0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToiletEvent:
+  ToiletDoorOpenEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  SmallRoomDoorOpenEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &289564006
@@ -963,6 +966,7 @@ GameObject:
   - component: {fileID: 391867886}
   - component: {fileID: 391867885}
   - component: {fileID: 391867887}
+  - component: {fileID: 391867888}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -986,6 +990,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1473532943}
   cameraManager: {fileID: 620766321}
   eventManager: {fileID: 289564005}
+  gameFlags: {fileID: 391867888}
   canvas: {fileID: 207900106}
 --- !u!4 &391867886
 Transform:
@@ -1014,6 +1019,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795a55b7680553448b77971eb4e9fb36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &391867888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391867884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f77954c94f708745b2d836b2da28ab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUnlockCloset: 0
 --- !u!1 &412136444 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6231081886594269529, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
@@ -1614,7 +1632,7 @@ PrefabInstance:
       addedObject: {fileID: 1050335844}
     - targetCorrespondingSourceObject: {fileID: -1353588070065995233, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1050335849}
+      addedObject: {fileID: 1050335846}
     - targetCorrespondingSourceObject: {fileID: 52279083425239838, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
       insertIndex: -1
       addedObject: {fileID: 216455104}
@@ -1893,7 +1911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialLockType: 1
   codeList: 3000310032003300340035003600370038003900
-  _passward: 
+  _passward: 3000390032003500
   codeAngleStep: 0
   isLock: 0
 --- !u!1 &739453978 stripped
@@ -1937,7 +1955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialLockType: 0
   codeList: 53004800510049004d00440041004500
-  _passward: 
+  _passward: 4800490044004500
   codeAngleStep: 0
   isLock: 0
 --- !u!4 &739453988 stripped
@@ -2448,7 +2466,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5891246855647065392, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
---- !u!114 &1050335849
+--- !u!114 &1050335846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2457,7 +2475,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1050335838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c0cb4ee9bdf1044cafa0206a07647a7, type: 3}
+  m_Script: {fileID: 11500000, guid: b906b8fcbb9b9c740b2fceb903339da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1053817969 stripped
