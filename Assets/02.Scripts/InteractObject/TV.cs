@@ -10,17 +10,19 @@ public class TV : CloseUpInteractableObject
     public Material TVMat;
     private AudioSource _audioSource;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         TVScreen = transform.GetChild(0).gameObject;
         TVMat = TVScreen.GetComponent<MeshRenderer>().materials[1];
         _audioSource = GetComponent<AudioSource>();
-        TVMat.SetTexture("Image",TVImages[0]);
     }
 
     public override void Interact()
     {
         base.Interact();
+        StopAllCoroutines();
+        TVMat.SetTexture("Image",TVImages[0]);
         StartCoroutine(PlayScreen());
         GameManager.Instance.cameraManager.ViewChange(GameManager.Instance.cameraManager.tvCam);
     }
@@ -34,7 +36,14 @@ public class TV : CloseUpInteractableObject
     public override void OutInteract()
     {
         base.OutInteract();
+        StopAllCoroutines();
         StartCoroutine(OffEffect());
+    }
+
+    //결국 생겨버린 스파게티, 클로즈업 전용 조명이 필요없기에 레이어 변경 X
+    public override void ChangeLayer(Transform trans, string layerName)
+    {
+        return;
     }
 
     IEnumerator PlayScreen()

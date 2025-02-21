@@ -47,7 +47,7 @@ public abstract class CloseUpInteractableObject : InteractableObject
         ChangeLayer(transform, "Interactables");
     }
 
-    private void ChangeLayer(Transform trans, string layerName)
+    public virtual void ChangeLayer(Transform trans, string layerName)
     {
         trans.gameObject.layer = LayerMask.NameToLayer(layerName);
 

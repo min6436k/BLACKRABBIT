@@ -35,7 +35,7 @@ public class InputHandler : MonoBehaviour
 
     void Update()
     {
-        Ray ray = GameManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = GameManager.Instance.cameraManager.mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Input.GetMouseButtonDown(0))
         {

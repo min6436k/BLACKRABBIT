@@ -14,7 +14,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Awake()
     {
-        _cam = GameManager.Instance.mainCamera;
+        _cam = GameManager.Instance.cameraManager.mainCamera;
     }
 
     private void Update()
