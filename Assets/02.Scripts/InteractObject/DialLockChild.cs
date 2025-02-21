@@ -71,6 +71,11 @@ public class DialLockChild : MonoBehaviour, IInputListener
             else if (CodeIndex < 0) CodeIndex = _parentDialLock.codeList.Length - 1;
             _parentDialLock.UpdateCode();
         }
+        
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            _parentDialLock.CheckCode();
+        }
     }
 
     public void OtherPointClick()

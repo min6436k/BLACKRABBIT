@@ -21,10 +21,15 @@ public class DialLock : CloseUpInteractableObject
 
     //임시
     private TextMeshProUGUI text;
+    
+    [SerializeField] private Char[] _passward;
+    public bool isLock;
 
     public override void Start()
     {
         base.Start();
+        
+        isLock = true;
 
         _cylindersTR = transform.Find("Cylinders");
         if (_cylindersTR == null)
@@ -81,6 +86,26 @@ public class DialLock : CloseUpInteractableObject
 
         GameManager.Instance.uINavigation.Close();
     }
+    
+    public void CheckCode()
+    {
+        for (int i = 0; i < _dials.Length; i++)
+        {
+            if (_currentCode[i] != _passward[i])
+            {
+                Debug.Log("비밀번호 틀림");
+                return;
+            }
+        }
+
+        Debug.Log("잠금 해제");
+        if (dialLockType == DialLockType.Closet)
+        {
+            GameManager.Instance.gameFlags.isUnlockCloset = true;
+            GameManager.Instance.eventManager.ClosetUnlockEvent.Invoke();
+        }
+        isLock = false;
+    }
 
     public void UpdateCode()
     {
@@ -92,6 +117,6 @@ public class DialLock : CloseUpInteractableObject
 
     public override bool IsInteractionPossible()
     {
-        return true;
+        return isLock;
     }
 }
