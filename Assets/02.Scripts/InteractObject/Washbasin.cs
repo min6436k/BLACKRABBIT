@@ -8,6 +8,6 @@ public class Washbasin : InteractableObject
 
     public override bool IsInteractionPossible()
     {
-        return true;
+        return GameManager.Instance.gameFlags.isMirrorBroken;
     }
 }

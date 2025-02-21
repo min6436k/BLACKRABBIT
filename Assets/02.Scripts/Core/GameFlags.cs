@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameFlags : MonoBehaviour
 {
-    public bool isUnlockCloset;
+    public bool isClosetUnlocked;
+    public bool isMirrorBroken;
 }

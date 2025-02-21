@@ -89,6 +89,9 @@ public class DialLock : CloseUpInteractableObject
     
     public void CheckCode()
     {
+        if (dialLockType == DialLockType.Closet && GameManager.Instance.gameFlags.isClosetUnlocked) // 입력이 중복으로 들어오므로 점프스케어가 여러번 실행되는걸 방지
+            return;
+        
         for (int i = 0; i < _dials.Length; i++)
         {
             if (_currentCode[i] != _passward[i])
@@ -101,7 +104,7 @@ public class DialLock : CloseUpInteractableObject
         Debug.Log("잠금 해제");
         if (dialLockType == DialLockType.Closet)
         {
-            GameManager.Instance.gameFlags.isUnlockCloset = true;
+            GameManager.Instance.gameFlags.isClosetUnlocked = true;
             GameManager.Instance.eventManager.ClosetUnlockEvent.Invoke();
         }
         isLock = false;

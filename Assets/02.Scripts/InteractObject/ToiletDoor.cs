@@ -12,7 +12,6 @@ public class ToiletDoor : Door, ILockedObject<DialLock>
         base.Interact();
         if (wasOpened == false) // 첫번째 열릴 때만 작동
         {
-            GameManager.Instance.eventManager.ToiletDoorOpenEvent.Invoke();
             wasOpened = true;
         }
     }
