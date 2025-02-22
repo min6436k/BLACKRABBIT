@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
@@ -9,6 +10,12 @@ public class StoryPlay : MonoBehaviour
     {
         _videoPlayer = GetComponent<VideoPlayer>();
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void Update()  
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            SceneManager.LoadSceneAsync("Map");
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)

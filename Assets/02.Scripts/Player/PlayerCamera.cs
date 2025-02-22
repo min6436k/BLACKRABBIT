@@ -18,6 +18,9 @@ public class PlayerCamera : MonoBehaviour
 
     void Start()
     {
+        // 감도 설정
+        mouseSensitivity = new Vector2(Setting.MouseSensitivity, Setting.MouseSensitivity);
+        
         //마우스 중앙 잠금
         Cursor.lockState = CursorLockMode.Locked;
         _playerController = GetComponent<PlayerController>();
