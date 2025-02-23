@@ -17,6 +17,9 @@ public class Option : MonoBehaviour
     
     [SerializeField] TMP_Dropdown resolutionDropdown;
     
+    [SerializeField] TMP_Text[] KeyTexts;
+    private int _keyIndex = -1;
+    
     private List<Resolution> resolutions = new List<Resolution>();
     private int _resolutionIndex = 3;
     private bool _isFullScreen = true;
@@ -49,6 +52,19 @@ public class Option : MonoBehaviour
         resolutionDropdown.AddOptions(resolutionOptions);
         resolutionDropdown.value = _resolutionIndex;
         resolutionDropdown.RefreshShownValue();
+        
+        Setting.CurrentKeyValues.Clear();
+        
+        Setting.CurrentKeyValues.Add(EKeyInputs.Up, KeyCode.W);
+        Setting.CurrentKeyValues.Add(EKeyInputs.Left, KeyCode.A);
+        Setting.CurrentKeyValues.Add(EKeyInputs.Down, KeyCode.S);
+        Setting.CurrentKeyValues.Add(EKeyInputs.Right, KeyCode.D);
+        Setting.CurrentKeyValues.Add(EKeyInputs.Interact, KeyCode.F);
+
+        for (int i = 0; i < KeyTexts.Length; i++)
+        {
+            KeyTexts[i].text = Setting.CurrentKeyValues[(EKeyInputs)i].ToString();
+        }
     }
 
     private void Update()
@@ -85,6 +101,28 @@ public class Option : MonoBehaviour
 
     public void SetFullScreen(bool isFullScreen)
     {
-        Screen.fullScreen = isFullScreen;
+        _isFullScreen = isFullScreen;
+        Screen.fullScreen = _isFullScreen;
+    }
+
+    public void SetKeyCode(int index)
+    {
+        _keyIndex = index;
+    }
+
+    void OnGUI()
+    {
+        Event e = Event.current;
+
+        if (e.isKey && _keyIndex != -1)
+        {
+            if (e.keyCode != KeyCode.Escape)
+            {
+                Setting.CurrentKeyValues[(EKeyInputs)_keyIndex] = e.keyCode;
+                KeyTexts[_keyIndex].text = Setting.CurrentKeyValues[(EKeyInputs)_keyIndex].ToString();
+            }
+
+            _keyIndex = -1;
+        }
     }
 }

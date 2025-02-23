@@ -1392,7 +1392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f77954c94f708745b2d836b2da28ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlockCloset: 0
+  isClosetUnlocked: 0
+  isMirrorBroken: 0
 --- !u!114 &391867890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1405,9 +1406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc62b7bd5d37ef48ba0006343b0a0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToiletDoorOpenEvent:
-    m_PersistentCalls:
-      m_Calls: []
   ClosetUnlockEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -2166,7 +2164,7 @@ PrefabInstance:
       addedObject: {fileID: 1050335853}
     - targetCorrespondingSourceObject: {fileID: -1353588070065995233, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1050335858}
+      addedObject: {fileID: 1050335854}
     - targetCorrespondingSourceObject: {fileID: 52279083425239838, guid: 8a4e6c54e60e708498ac68cd5c955493, type: 3}
       insertIndex: -1
       addedObject: {fileID: 216455104}
@@ -3346,7 +3344,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1050335858
+--- !u!114 &1050335854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3355,7 +3353,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1050335838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c0cb4ee9bdf1044cafa0206a07647a7, type: 3}
+  m_Script: {fileID: 11500000, guid: b906b8fcbb9b9c740b2fceb903339da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioTransitionTime: 4.5
@@ -10012,6 +10010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53082c4f3df619e4685bcbd2dffb06ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _acceleration: 4.5
 --- !u!114 &1713869671
 MonoBehaviour:
   m_ObjectHideFlags: 0
