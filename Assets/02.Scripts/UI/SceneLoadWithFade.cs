@@ -32,7 +32,10 @@ public class SceneLoadWithFade : MonoBehaviour
 
         _fadeInTween = _image.DOFade(0, fadeTime).SetEase(Ease.InOutQuad).Pause().SetAutoKill(false);
         _fadeOutTween = _image.DOFade(1, fadeTime).SetEase(Ease.InOutQuad).Pause().SetAutoKill(false);
+    }
 
+    private void Start()
+    {
         SceneManager.sceneLoaded += sceneLoaded;
     }
 
@@ -48,7 +51,9 @@ public class SceneLoadWithFade : MonoBehaviour
         _fadeInTween.Rewind();
         _fadeInTween.Play();
     }
-    
+
+
+
     public void FadeOut()
     {
         _fadeOutTween.Rewind();
