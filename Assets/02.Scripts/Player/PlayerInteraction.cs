@@ -60,7 +60,7 @@ public class PlayerInteraction : MonoBehaviour
     /// <summary>
     /// 클로즈업과 같은 상호작용 상태에서 벗어나는 함수
     /// </summary>
-    private void ExitInteract()
+    public void ExitInteract()
     {
         if (PlayerController.CurrentState == PlayerState.Interact && Input.GetKey(KeyCode.Escape))
         {

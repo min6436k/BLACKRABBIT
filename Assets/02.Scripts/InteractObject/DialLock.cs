@@ -1,6 +1,8 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -18,6 +20,8 @@ public class DialLock : CloseUpInteractableObject
 
     private Transform _cylindersTR;
     private DialLockChild[] _dials;
+
+    public GameObject[] chainAndLock;
 
     //임시
     private TextMeshProUGUI text;
@@ -61,7 +65,7 @@ public class DialLock : CloseUpInteractableObject
         foreach (Transform child in _cylindersTR)
         {
             child.GetComponent<InputHandler>().enabled = true;
-            child.GetComponent<MeshCollider>().enabled = true;
+            child.GetComponentInChildren<MeshCollider>().enabled = true;
         }
 
         text = GameManager.Instance.uINavigation.Open("InteractCloseUpUI").GetComponentInChildren<TextMeshProUGUI>();
@@ -101,6 +105,19 @@ public class DialLock : CloseUpInteractableObject
             }
         }
 
+        DOVirtual.DelayedCall(1, () =>
+        {
+            foreach (GameObject o in chainAndLock)
+            {
+                o.GetComponent<MeshCollider>().enabled = false;
+                o.GetComponent<MeshRenderer>().enabled = false;
+            }
+        });
+        GameManager.Instance.playerController.CurrentState = PlayerState.Idle;
+        GameManager.Instance.cameraManager.PlayerView();
+        OutInteract();
+        SceneLoadWithFade.Instance.FadeOutIn();
+        
         Debug.Log("잠금 해제");
         if (dialLockType == DialLockType.Closet)
         {

@@ -1,3 +1,5 @@
+using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
@@ -11,15 +13,25 @@ public class StoryPlay : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Return))
+            StartGameScene(null);
+    }
+#endif
+
+
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        _videoPlayer.Play();
+        DOVirtual.DelayedCall(1, () => _videoPlayer.Play());
         _videoPlayer.loopPointReached += StartGameScene;
     }
 
     void StartGameScene(VideoPlayer vp)
     {
-        SceneManager.LoadSceneAsync("Map");
+        SceneLoadWithFade.Instance.LoadScene("Map");
     }
+
 }

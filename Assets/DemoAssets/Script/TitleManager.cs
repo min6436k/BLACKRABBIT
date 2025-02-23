@@ -5,7 +5,7 @@ public class TitleManager : MonoBehaviour
 {
     public void PlayButton()
     {
-        SceneManager.LoadSceneAsync("Story");
+        SceneLoadWithFade.Instance.LoadScene("Story");
     }
 
     public void ExitButton()

@@ -19,6 +19,7 @@ public class DialLockChild : MonoBehaviour, IInputListener
     private Tweener _sizeUpTween;
     private Tween _dialMoveTween;
     private Vector3 _originScale;
+    private Vector3 _originrot;
     private DialState _dialState;
 
     public void Init(DialLock parentDialLock)
@@ -30,8 +31,9 @@ public class DialLockChild : MonoBehaviour, IInputListener
         _sizeUpTween = transform.DOScale(_originScale*1.5f, 0.7f).Pause()
             .SetAutoKill(false).SetEase(Ease.InOutQuart);
 
+        _originrot = transform.localEulerAngles;
         CodeIndex = Random.Range(0, parentDialLock.codeList.Length - 1);
-        transform.localEulerAngles = Vector3.up * (CodeIndex * parentDialLock.codeAngleStep);
+        transform.localEulerAngles = _originrot + Vector3.up * (CodeIndex * parentDialLock.codeAngleStep);
     }
 
     public void InitClickHandler()
@@ -63,7 +65,7 @@ public class DialLockChild : MonoBehaviour, IInputListener
 
             Vector3 rotateVector;
 
-            rotateVector = Vector3.up * (CodeIndex * _parentDialLock.codeAngleStep); 
+            rotateVector = _originrot + Vector3.up * (CodeIndex * _parentDialLock.codeAngleStep); 
             _dialMoveTween.Kill();
             _dialMoveTween = transform.DOLocalRotate(rotateVector, 0.2f);
 
