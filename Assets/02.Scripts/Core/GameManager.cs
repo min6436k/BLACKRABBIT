@@ -26,5 +26,15 @@ public class GameManager : MonoBehaviour
 
         uINavigation = GetComponent<UINavigation>();
         soundManager = GetComponent<SoundManager>();
+        
+        // 키 초기값을 타이틀에서 하기에 맵 바로 실행하면 오류가 생겨 임시로 초기값 설정해줌
+        if (Setting.CurrentKeyValues.Count < 5)
+        {
+            Setting.CurrentKeyValues.Add(EKeyInputs.Up, KeyCode.W);
+            Setting.CurrentKeyValues.Add(EKeyInputs.Down, KeyCode.S);
+            Setting.CurrentKeyValues.Add(EKeyInputs.Left, KeyCode.A);
+            Setting.CurrentKeyValues.Add(EKeyInputs.Right, KeyCode.D);
+            Setting.CurrentKeyValues.Add(EKeyInputs.Interact, KeyCode.F);
+        }
     }
 }
