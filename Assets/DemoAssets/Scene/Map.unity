@@ -13870,7 +13870,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codeList: 11010000120100001301000014010000
+  _password: 12010000120100001201000013010000
   _handleTR: {fileID: 0}
+  isLock: 0
   text: []
 --- !u!4 &8080156448495375868
 Transform:

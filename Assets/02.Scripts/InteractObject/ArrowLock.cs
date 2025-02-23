@@ -10,11 +10,14 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
     public KeyCode[] codeList;
     private KeyCode[] _currentCode = new KeyCode[4];
     private int _currentIndex = 0;
+    [SerializeField] private KeyCode[] _password;
 
     public Transform _handleTR;
     private Vector3 _handleOriginPosition;
     private Tweener _arrowMoveTween;
-    private bool _isMoving = false; 
+    private bool _isMoving = false;
+
+    public bool isLock;
 
     //임시
     public TextMeshProUGUI[] text;
@@ -22,6 +25,7 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
     public override void Start()
     {
         base.Start();
+        isLock = true;
         InitClickHandler();
         
         _handleTR = transform.Find("Handle");
@@ -76,6 +80,31 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
 
     private void CodeInit()
     {
+        if (!isLock)
+            return;
+        
+        if (_currentIndex == codeList.Length)
+        {
+            bool flag = false;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (_currentCode[i] != _password[i])
+                    flag = true;
+            }
+
+            if (!flag)
+            {
+                isLock = false;
+                Debug.Log("잠금해제");
+                
+                GameManager.Instance.playerController.CurrentState = PlayerState.Idle;
+                GameManager.Instance.cameraManager.PlayerView();
+                OutInteract();
+                SceneLoadWithFade.Instance.FadeOutIn();
+                
+            }
+        }
+        
         _currentIndex = 0;
         _currentCode = new KeyCode[4];
         foreach (TextMeshProUGUI textMeshProUGUI in text)
@@ -122,6 +151,6 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
 
     public override bool IsInteractionPossible()
     {
-        return true;
+        return isLock;
     }
 }
