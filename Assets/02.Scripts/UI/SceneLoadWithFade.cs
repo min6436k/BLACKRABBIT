@@ -28,14 +28,13 @@ public class SceneLoadWithFade : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        _image = GetComponentInChildren<Image>();
-
-        _fadeInTween = _image.DOFade(0, fadeTime).SetEase(Ease.InOutQuad).Pause().SetAutoKill(false);
-        _fadeOutTween = _image.DOFade(1, fadeTime).SetEase(Ease.InOutQuad).Pause().SetAutoKill(false);
     }
 
     private void Start()
     {
+        _image = GetComponentInChildren<Image>();
+        _fadeInTween = _image.DOFade(0, fadeTime).SetEase(Ease.InOutQuad).Pause().SetAutoKill(false);
+        _fadeOutTween = _image.DOFade(1, fadeTime).SetEase(Ease.InOutQuad).Pause().SetAutoKill(false);
         SceneManager.sceneLoaded += sceneLoaded;
     }
 

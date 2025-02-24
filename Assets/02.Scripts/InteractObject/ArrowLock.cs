@@ -13,6 +13,9 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
     [SerializeField] private KeyCode[] _password;
 
     public Transform _handleTR;
+
+    public GameObject[] chainAndLock;
+    
     private Vector3 _handleOriginPosition;
     private Tweener _arrowMoveTween;
     private bool _isMoving = false;
@@ -43,12 +46,19 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
 
     public override void Interact()
     {
-        base.Interact();
-        GameManager.Instance.cameraManager.ViewChange(GameManager.Instance.cameraManager.exitDoorLockCam);
+        if (GameManager.Instance.gameFlags.isCorpseDisable)
+        {
+            GameManager.Instance.cameraManager.JumpScareLight(true);      
+        }
+        else
+        {
+            base.Interact();
+            GameManager.Instance.cameraManager.ViewChange(GameManager.Instance.cameraManager.exitDoorLockCam);
         
-        text = GameManager.Instance.uINavigation.Open("ArrowLockUI").GetComponentsInChildren<TextMeshProUGUI>();
+            text = GameManager.Instance.uINavigation.Open("ArrowLockUI").GetComponentsInChildren<TextMeshProUGUI>();
 
-        GetComponent<InputHandler>().enabled = true;
+            GetComponent<InputHandler>().enabled = true;    
+        }
     }
 
 
@@ -95,13 +105,26 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
             if (!flag)
             {
                 isLock = false;
-                Debug.Log("잠금해제");
                 
                 GameManager.Instance.playerController.CurrentState = PlayerState.Idle;
                 GameManager.Instance.cameraManager.PlayerView();
                 OutInteract();
                 SceneLoadWithFade.Instance.FadeOutIn();
-                
+                DOVirtual.DelayedCall(1, () =>
+                {
+                    GameManager.Instance.soundManager.PlaySFX("자물쇠 성공 사운드",volume:2.5f);
+
+                    foreach (GameObject o in chainAndLock)
+                    {
+                        o.GetComponent<MeshCollider>().enabled = false;
+                        o.GetComponent<MeshRenderer>().enabled = false;
+                    }
+                });
+            }
+            else
+            {
+                GameManager.Instance.soundManager.PlaySFX("자물쇠 실패 사운드",volume:3f);
+
             }
         }
         
@@ -113,6 +136,8 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
 
     private Tweener ArrowMove(KeyCode inputArrow)
     {
+        GameManager.Instance.soundManager.PlaySFX("자물쇠 다이얼 사운드",volume:0.4f);
+
         if (_currentIndex < 4)
         {
             char temp  = inputArrow switch

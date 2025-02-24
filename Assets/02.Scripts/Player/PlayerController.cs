@@ -12,7 +12,7 @@ public enum PlayerState
 
 public class PlayerController : MonoBehaviour
 {
-    public float MoveSpeed { get; private set; } = 2;
+    [field: SerializeField] public float MoveSpeed { get; set; } = 2;
     public PlayerState CurrentState { get; set; } = PlayerState.Idle;
 
     //GetAxis 입력 중간 저장

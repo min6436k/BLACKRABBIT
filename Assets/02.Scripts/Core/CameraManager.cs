@@ -15,6 +15,7 @@ public class CameraManager : MonoBehaviour
     public CinemachineCamera exitDoorLockCam;
     public CinemachineCamera noteCam;
     public CinemachineCamera toiletCam;
+    public CinemachineCamera washbasinCam;
     public CinemachineCamera tvCam;
 
     private List<CinemachineCamera> _nonPlayerCameraList = new List<CinemachineCamera>();
@@ -26,6 +27,7 @@ public class CameraManager : MonoBehaviour
         _nonPlayerCameraList.Add(exitDoorLockCam);
         _nonPlayerCameraList.Add(toiletCam);
         _nonPlayerCameraList.Add(noteCam);
+        _nonPlayerCameraList.Add(washbasinCam);
         mainCamera.GetComponent<Volume>().profile.TryGet<LiftGammaGain>(out LFG);
     }
 

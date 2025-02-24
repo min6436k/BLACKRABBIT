@@ -100,13 +100,16 @@ public class DialLock : CloseUpInteractableObject
         {
             if (_currentCode[i] != _passward[i])
             {
-                Debug.Log("비밀번호 틀림");
+                GameManager.Instance.soundManager.PlaySFX("자물쇠 실패 사운드",volume:3f);
+
                 return;
             }
         }
 
         DOVirtual.DelayedCall(1, () =>
         {
+            GameManager.Instance.soundManager.PlaySFX("자물쇠 성공 사운드",volume:2.5f);
+
             foreach (GameObject o in chainAndLock)
             {
                 o.GetComponent<MeshCollider>().enabled = false;
@@ -118,11 +121,9 @@ public class DialLock : CloseUpInteractableObject
         OutInteract();
         SceneLoadWithFade.Instance.FadeOutIn();
         
-        Debug.Log("잠금 해제");
         if (dialLockType == DialLockType.Closet)
         {
             GameManager.Instance.gameFlags.isClosetUnlocked = true;
-            GameManager.Instance.eventManager.ClosetUnlockEvent.Invoke();
         }
         isLock = false;
     }

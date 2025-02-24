@@ -8,6 +8,8 @@ public interface IInteractable
 {
     // 상호작용 시 행동
     void Interact();
+
+    void InteractFailed();
     
     // 상호작용이 가능한지 확인
     bool IsInteractionPossible();
@@ -39,5 +41,7 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
         _outline.enabled = isActive;
     }
     public abstract void Interact();
+
+    public virtual void InteractFailed(){}
     public abstract bool IsInteractionPossible(); 
 }

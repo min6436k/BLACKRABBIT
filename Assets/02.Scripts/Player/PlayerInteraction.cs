@@ -41,9 +41,11 @@ public class PlayerInteraction : MonoBehaviour
                 
                 targetObject.SetOutLine(true);    
                 
-                if (Input.GetKeyDown(KeyCode.F) && targetObject.IsInteractionPossible())
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-                    targetObject.Interact();
+                    if (targetObject.IsInteractionPossible())
+                        targetObject.Interact();
+                    else targetObject.InteractFailed();
                 }
             }
         }

@@ -10,6 +10,12 @@ public class Door : ActiveInteractableObject
             .SetAutoKill(false).SetEase(Ease.InOutCubic);
     }
 
+    public override void InteractFailed()
+    {
+        GameManager.Instance.soundManager.PlaySFX("잠긴 문 사운드",volume:15f,pitch:1.15f);
+
+    }
+
     public override bool IsInteractionPossible()
     {
         return true;
