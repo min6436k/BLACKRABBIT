@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        
 
         if(CurrentState == PlayerState.Idle)
             Move();
