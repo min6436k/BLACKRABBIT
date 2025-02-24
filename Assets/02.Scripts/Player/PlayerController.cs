@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Serialization;
 
 public enum PlayerState
@@ -24,10 +25,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 _moveDir;
     private float _dirSpeed;
     public CharacterController Controller { get; private set; }
+    public PlayableAsset[] jumpScares;
+    
+    private PlayableDirector _playableDirector;
     
     
     void Start()
     {
+        _playableDirector = GetComponent<PlayableDirector>();
         Controller = GetComponent<CharacterController>();
     }
 
@@ -55,5 +60,12 @@ public class PlayerController : MonoBehaviour
 
         //두 값을 합쳐 자연스러운 이동속도 구현
         Controller.Move(_moveDir * _dirSpeed);
+    }
+
+    public void JumpScareTimeLine(int n)
+    {
+        CurrentState = PlayerState.JumpScare;
+        _playableDirector.playableAsset = jumpScares[n];
+        _playableDirector.Play();
     }
 }

@@ -20,6 +20,7 @@ public class CameraManager : MonoBehaviour
 
     private List<CinemachineCamera> _nonPlayerCameraList = new List<CinemachineCamera>();
     private LiftGammaGain LFG;
+    private bool _isRedScreen = false;
 
     private void Start()
     {
@@ -40,9 +41,9 @@ public class CameraManager : MonoBehaviour
 
     public void PlayerView() => ViewChange(playerCam);
 
-    public void JumpScareLight(bool b)
+    public void RedScreen()
     {
-        if (b)
+        if (!_isRedScreen)
         {
             StartCoroutine(OnJumpScare());
         }
@@ -50,6 +51,8 @@ public class CameraManager : MonoBehaviour
         {
             LFG.active = false;
         }
+
+        _isRedScreen = !_isRedScreen;
     }
 
     IEnumerator OnJumpScare()

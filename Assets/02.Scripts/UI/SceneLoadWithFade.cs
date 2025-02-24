@@ -58,6 +58,7 @@ public class SceneLoadWithFade : MonoBehaviour
     [ContextMenu("Out")]
     public void FadeOut()
     {
+
         _fadeOutTween.Rewind();
         _fadeOutTween.Play();
     }

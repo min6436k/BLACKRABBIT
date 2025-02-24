@@ -48,7 +48,7 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
     {
         if (GameManager.Instance.gameFlags.isCorpseDisable)
         {
-            GameManager.Instance.cameraManager.JumpScareLight(true);      
+            GameManager.Instance.playerController.JumpScareTimeLine(1);
         }
         else
         {
@@ -116,8 +116,8 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
 
                     foreach (GameObject o in chainAndLock)
                     {
-                        o.GetComponent<MeshCollider>().enabled = false;
                         o.GetComponent<MeshRenderer>().enabled = false;
+                        o.GetComponent<MeshCollider>().enabled = false;
                     }
                 });
             }
