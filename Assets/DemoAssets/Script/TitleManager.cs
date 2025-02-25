@@ -1,8 +1,16 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
+    [SerializeField] private GameObject Option;
+
+    private void Start()
+    {
+        Option.SetActive(false);
+    } 
+
     public void PlayButton()
     {
         SceneLoadWithFade.Instance.LoadScene("Story");
@@ -19,6 +27,6 @@ public class TitleManager : MonoBehaviour
 
     public void OptionButton()
     {
-        
+        Option.SetActive(true);
     }
 }

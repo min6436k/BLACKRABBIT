@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float MoveSpeed { get; set; } = 2;
     public PlayerState CurrentState { get; set; } = PlayerState.Idle;
 
+    [SerializeField] private float _acceleration = 4;
+
     //GetAxis 입력 중간 저장
     private float _inputX, _inputY;
     
@@ -46,8 +48,21 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
+        if (Input.GetKey(Setting.CurrentKeyValues[EKeyInputs.Up]))
+            _inputY = Mathf.MoveTowards(_inputY, 1f, Time.deltaTime * _acceleration);
+        else if (Input.GetKey(Setting.CurrentKeyValues[EKeyInputs.Down]))
+            _inputY = Mathf.MoveTowards(_inputY, -1f, Time.deltaTime * _acceleration);
+        else 
+            _inputY = Mathf.MoveTowards(_inputY, 0f, Time.deltaTime * _acceleration);
         
-        (_inputX, _inputY) = (Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+        if (Input.GetKey(Setting.CurrentKeyValues[EKeyInputs.Left]))
+            _inputX = Mathf.MoveTowards(_inputX, -1f, Time.deltaTime * _acceleration);
+        else if (Input.GetKey(Setting.CurrentKeyValues[EKeyInputs.Right]))
+            _inputX = Mathf.MoveTowards(_inputX, 1f, Time.deltaTime * _acceleration);
+        else
+            _inputX = Mathf.MoveTowards(_inputX, 0f, Time.deltaTime * _acceleration);
+        
+        // (_inputX, _inputY) = (Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
 
         //인풋을 벡터로 저장
         _moveInput = (transform.forward*_inputY + transform.right*_inputX);
