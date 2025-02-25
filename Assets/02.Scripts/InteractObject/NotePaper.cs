@@ -36,6 +36,11 @@ public class NotePaper : UIView
 
         yield return null;
         
+        for (int i = 0; i < papers.childCount; i++)
+        {
+            papers.GetChild(i).DOLocalRotate(Vector3.zero, 0.5f);
+        }
+        
         temp.DORotate(leftPos.eulerAngles, 0.5f).SetEase(Ease.InOutSine);
         yield return temp.DOMove(leftPos.position, 0.5f).SetEase(Ease.InOutSine).WaitForCompletion();
         
