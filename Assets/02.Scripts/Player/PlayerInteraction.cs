@@ -24,9 +24,12 @@ public class PlayerInteraction : MonoBehaviour
     private void SearchObj()
     {
         if (Physics.SphereCast(Cam.transform.position, interactionRadius, Cam.transform.forward, out RaycastHit hit,
-                interactionDistance, LayerMask.GetMask("Interactables"))
+                interactionDistance, LayerMask.GetMask("Interactables", "Wall"))
             && PlayerController.CurrentState == PlayerState.Idle)
         {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                return;
+
             //마지막으로 감지한 오브젝트와 다를 시 이전 오브젝트 아웃라인 해제
             if (_lastDetectedObject != null
                 && hit.collider.gameObject != _lastDetectedObject.gameObject)
@@ -89,6 +92,7 @@ public class PlayerInteraction : MonoBehaviour
         Gizmos.color = Color.red;
         if (Cam == null)
             return;
+        
         Gizmos.DrawWireSphere(Cam.transform.position + (Cam.transform.forward * interactionDistance),
             interactionRadius);
     }
