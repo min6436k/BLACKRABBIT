@@ -16,6 +16,8 @@ public class Closet : ActiveInteractableObject, ILockedObject<DialLock>
             GameManager.Instance.eventManager.ClosetUnlockEvent.Invoke();
             _isjumpscareDone = true;
         }
+        GameManager.Instance.soundManager.PlaySFX("옷장 사운드");
+
     }
 
     public override Tweener SetTween()

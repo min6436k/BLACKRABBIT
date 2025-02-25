@@ -22,12 +22,7 @@ public class Option : UIView
     
     private List<Resolution> resolutions = new List<Resolution>();
     private int _resolutionIndex = 3;
-#if UNITY_EDITOR
-
     private bool _isFullScreen = false;
-#else
-    private bool _isFullScreen = Screen.fullScreen;
-#endif
 
     private void Start()
     {

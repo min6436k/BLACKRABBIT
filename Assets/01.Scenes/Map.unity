@@ -1889,6 +1889,7 @@ MonoBehaviour:
   uINavigation: {fileID: 0}
   soundManager: {fileID: 0}
   canvas: {fileID: 207900106}
+  isEnding: 0
 --- !u!4 &391867886
 Transform:
   m_ObjectHideFlags: 0
@@ -1939,6 +1940,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9b3ef6cc9181a304a911e07d221f0b9d, type: 3}
   - {fileID: 8300000, guid: 4c53285399ba4bf49939d49e6e2aa24f, type: 3}
   - {fileID: 8300000, guid: 5ac3ee895de7c754da4a2a1b1fbf9d17, type: 3}
+  - {fileID: 8300000, guid: 6f9a71fa017424446ad4fd09a063b53c, type: 3}
 --- !u!114 &391867889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1954,6 +1956,7 @@ MonoBehaviour:
   isClosetUnlocked: 0
   isMirrorBroken: 0
   isCorpseDisable: 0
+  isjumpscareDone: 0
 --- !u!114 &391867890
 MonoBehaviour:
   m_ObjectHideFlags: 0

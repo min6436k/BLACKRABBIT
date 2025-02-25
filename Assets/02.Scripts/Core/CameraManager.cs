@@ -61,7 +61,7 @@ public class CameraManager : MonoBehaviour
     public void EndingLight()
     {
         DOTween.To(() => colorAdjustments.postExposure.value, x => colorAdjustments.postExposure.value = x, 25, 2)
-            .SetEase(Ease.InQuart).SetDelay(2);
+            .SetEase(Ease.InQuart).SetDelay(0.5f);
     }
 
     IEnumerator OnJumpScare()

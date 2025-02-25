@@ -26,6 +26,7 @@ public class UINavigation : MonoBehaviour
     {
         if (_uiStack.Count < 1) return null;
         
+        _uiStack.Peek().Hide();
         Destroy(_uiStack.Pop().gameObject);
 
         if (_uiStack.Count > 0)

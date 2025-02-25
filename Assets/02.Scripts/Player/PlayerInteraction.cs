@@ -69,6 +69,7 @@ public class PlayerInteraction : MonoBehaviour
                 PlayerController.CurrentState = PlayerState.Idle;
                 GameManager.Instance.cameraManager.PlayerView();
 
+                GameManager.Instance.uINavigation.Close();
                 if (_lastDetectedObject is CloseUpInteractableObject closeUpObject)
                     closeUpObject.OutInteract();
                 break;

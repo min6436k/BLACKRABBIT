@@ -33,7 +33,16 @@ public class StoryPlay : MonoBehaviour
 
     void StartGameScene(VideoPlayer vp)
     {
-        if (SceneManager.GetActiveScene().name == "Story")
-            SceneLoadWithFade.Instance.LoadScene("Map");
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Story":
+                SceneLoadWithFade.Instance.LoadScene("Map");
+                break;
+            case "Ending":
+                Cursor.lockState = CursorLockMode.None;
+                GameManager.Instance = null;
+                SceneLoadWithFade.Instance.LoadScene("Title");
+                break;
+        }
     }
 }

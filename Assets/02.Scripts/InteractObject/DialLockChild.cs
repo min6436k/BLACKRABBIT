@@ -51,6 +51,7 @@ public class DialLockChild : MonoBehaviour, IInputListener
             _sizeUpTween.PlayForward(); 
         }
     }
+    
 
 
 
