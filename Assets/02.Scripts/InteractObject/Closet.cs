@@ -6,10 +6,16 @@ public class Closet : ActiveInteractableObject, ILockedObject<DialLock>
     [field : SerializeField]
     public DialLock Lock { get; set; }
 
+    private bool _isjumpscareDone = false;
+
     public override void Interact()
     {
         base.Interact();
-        GameManager.Instance.eventManager.ClosetUnlockEvent.Invoke();
+        if (_isjumpscareDone == false)
+        {
+            GameManager.Instance.eventManager.ClosetUnlockEvent.Invoke();
+            _isjumpscareDone = true;
+        }
     }
 
     public override Tweener SetTween()

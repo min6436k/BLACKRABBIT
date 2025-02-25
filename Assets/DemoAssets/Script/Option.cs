@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class Option : MonoBehaviour
+public class Option : UIView
 {
     [SerializeField] AudioMixer audioMixer;
     
@@ -22,7 +22,12 @@ public class Option : MonoBehaviour
     
     private List<Resolution> resolutions = new List<Resolution>();
     private int _resolutionIndex = 3;
-    private bool _isFullScreen = true;
+#if UNITY_EDITOR
+
+    private bool _isFullScreen = false;
+#else
+    private bool _isFullScreen = Screen.fullScreen;
+#endif
 
     private void Start()
     {
@@ -41,6 +46,7 @@ public class Option : MonoBehaviour
         resolutions.Add(new Resolution { width = 1280, height = 720 });
         resolutions.Add(new Resolution { width = 1600, height = 900 });
         resolutions.Add(new Resolution { width = 1920, height = 1080 });
+        resolutions.Add(new Resolution { width = 2560, height = 1440 });
         
         List<String> resolutionOptions = new List<string>();
 
@@ -124,5 +130,12 @@ public class Option : MonoBehaviour
 
             _keyIndex = -1;
         }
+    }
+
+    public override void Show()
+    {
+        base.Show();
+        Cursor.lockState = CursorLockMode.None;
+        GameManager.Instance.playerController.CurrentState = PlayerState.Option;
     }
 }

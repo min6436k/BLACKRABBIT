@@ -49,6 +49,7 @@ public class ArrowLock : CloseUpInteractableObject, IInputListener
         if (GameManager.Instance.gameFlags.isCorpseDisable)
         {
             GameManager.Instance.playerController.JumpScareTimeLine(1);
+            GameManager.Instance.gameFlags.isCorpseDisable = false;
         }
         else
         {

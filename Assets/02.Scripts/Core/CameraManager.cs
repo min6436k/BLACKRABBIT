@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -20,6 +21,7 @@ public class CameraManager : MonoBehaviour
 
     private List<CinemachineCamera> _nonPlayerCameraList = new List<CinemachineCamera>();
     private LiftGammaGain LFG;
+    private ColorAdjustments colorAdjustments;
     private bool _isRedScreen = false;
 
     private void Start()
@@ -30,6 +32,7 @@ public class CameraManager : MonoBehaviour
         _nonPlayerCameraList.Add(noteCam);
         _nonPlayerCameraList.Add(washbasinCam);
         mainCamera.GetComponent<Volume>().profile.TryGet<LiftGammaGain>(out LFG);
+        mainCamera.GetComponent<Volume>().profile.TryGet<ColorAdjustments>(out colorAdjustments);
     }
 
     public void ViewChange(CinemachineCamera target)
@@ -54,6 +57,12 @@ public class CameraManager : MonoBehaviour
 
         _isRedScreen = !_isRedScreen;
     }
+    
+    public void EndingLight()
+    {
+        DOTween.To(() => colorAdjustments.postExposure.value, x => colorAdjustments.postExposure.value = x, 25, 2)
+            .SetEase(Ease.InQuart).SetDelay(2);
+    }
 
     IEnumerator OnJumpScare()
     {
@@ -66,4 +75,7 @@ public class CameraManager : MonoBehaviour
         }
         LFG.active = true;
     }
+
+
+    
 }

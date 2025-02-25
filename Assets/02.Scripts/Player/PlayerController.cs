@@ -1,4 +1,6 @@
 using System;
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Serialization;
@@ -8,6 +10,7 @@ public enum PlayerState
     Idle,
     Interact,
     JumpScare,
+    Option
 }
     
 
@@ -40,8 +43,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
-
         if(CurrentState == PlayerState.Idle)
             Move();
     }
@@ -82,5 +83,15 @@ public class PlayerController : MonoBehaviour
         CurrentState = PlayerState.JumpScare;
         _playableDirector.playableAsset = jumpScares[n];
         _playableDirector.Play();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("EndingTrigger"))
+        {
+            CurrentState = PlayerState.Interact;
+            GameManager.Instance.cameraManager.EndingLight();
+            DOVirtual.DelayedCall(4, ()=>SceneLoadWithFade.Instance.LoadScene("Ending"));
+        }
     }
 }

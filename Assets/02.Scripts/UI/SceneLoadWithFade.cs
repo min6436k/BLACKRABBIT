@@ -71,7 +71,8 @@ public class SceneLoadWithFade : MonoBehaviour
     public void LoadScene(string name)
     {
         _fadeOutTween.Rewind();
-        _fadeOutTween.Play().OnComplete(() => SceneManager.LoadSceneAsync(name));
+        _fadeOutTween.Play();
+        DOVirtual.DelayedCall(1, () => SceneManager.LoadSceneAsync(name));
     }
 }
 

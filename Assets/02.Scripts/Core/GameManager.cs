@@ -6,12 +6,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerController playerController;
+    public PlayerInteraction playerInteraction;
     public CameraManager cameraManager;
     public EventManager eventManager;
     public GameFlags gameFlags;
     [HideInInspector] public UINavigation uINavigation;
     [HideInInspector] public SoundManager soundManager;
     public Canvas canvas;
+    
+    public bool isEnding = false;
 
     private void Awake()
     {
